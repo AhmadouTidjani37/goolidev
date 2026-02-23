@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react'; 
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 import Button from '../common/Button';
-
 import logo from '../../assets/images/goolidev_logo.png';
 import { COMPANY_NAME, COMPANY_EMAIL, COMPANY_PHONE, COMPANY_ADDRESS, COMPANY_HOURS } from 'components/constants';
 
@@ -15,6 +14,10 @@ const Footer: React.FC = () => {
     setEmail('');
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-6">
@@ -22,11 +25,10 @@ const Footer: React.FC = () => {
           {/* Logo et description */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              {/* Remplacer l'icône Code par le logo */}
               <img 
                 src={logo} 
                 alt={`${COMPANY_NAME} logo`} 
-                className="h-8 w-auto" // Version plus petite pour le footer
+                className="h-8 w-auto"
               />
               <span className="text-2xl font-bold">{COMPANY_NAME}</span>
             </div>
@@ -36,16 +38,15 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Le reste du footer reste identique */}
           {/* Services */}
           <div>
             <h4 className="font-bold text-lg mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400">
-              <li className="hover:text-white transition">Design UI/UX</li>
-              <li className="hover:text-white transition">Développement Web</li>
-              <li className="hover:text-white transition">Applications Mobile</li>
-              <li className="hover:text-white transition">Sécurité Informatique</li>
-              <li className="hover:text-white transition">Secrétariat Bureautique</li>
+              <li className="hover:text-white transition cursor-pointer">Design UI/UX</li>
+              <li className="hover:text-white transition cursor-pointer">Développement Web</li>
+              <li className="hover:text-white transition cursor-pointer">Applications Mobile</li>
+              <li className="hover:text-white transition cursor-pointer">Sécurité Informatique</li>
+              <li className="hover:text-white transition cursor-pointer">Secrétariat Bureautique</li>
             </ul>
           </div>
 
@@ -55,11 +56,21 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-start space-x-2">
                 <Mail className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                <span>{COMPANY_EMAIL}</span>
+                <a 
+                  href={`mailto:${COMPANY_EMAIL}`} 
+                  className="hover:text-white transition"
+                >
+                  {COMPANY_EMAIL}
+                </a>
               </li>
               <li className="flex items-start space-x-2">
                 <Phone className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                <span>{COMPANY_PHONE}</span>
+                <a 
+                  href={`tel:${COMPANY_PHONE.replace(/\s/g, '')}`} 
+                  className="hover:text-white transition"
+                >
+                  {COMPANY_PHONE}
+                </a>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
@@ -96,15 +107,30 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Copyright */}
+        {/* Copyright et liens légaux - CORRIGÉ */}
         <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} {COMPANY_NAME}. Tous droits réservés.</p>
           <div className="flex justify-center space-x-4 mt-4 text-sm">
-            <a href="#" className="hover:text-white transition">Mentions légales</a>
+            <button 
+              onClick={scrollToTop}
+              className="hover:text-white transition bg-transparent border-none cursor-pointer"
+            >
+              Mentions légales
+            </button>
             <span>•</span>
-            <a href="#" className="hover:text-white transition">Politique de confidentialité</a>
+            <button 
+              onClick={scrollToTop}
+              className="hover:text-white transition bg-transparent border-none cursor-pointer"
+            >
+              Politique de confidentialité
+            </button>
             <span>•</span>
-            <a href="#" className="hover:text-white transition">CGV</a>
+            <button 
+              onClick={scrollToTop}
+              className="hover:text-white transition bg-transparent border-none cursor-pointer"
+            >
+              CGV
+            </button>
           </div>
         </div>
       </div>
