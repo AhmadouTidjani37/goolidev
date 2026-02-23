@@ -328,15 +328,12 @@ const ContactForm: React.FC = () => {
             </div>
           </div>
           
-          {/* Adresse - MISE À JOUR */}
+          {/* Adresse */}
           <div className="flex items-start space-x-3">
             <MapPin className="w-6 h-6 flex-shrink-0 mt-1" />
             <div>
               <p className="font-medium mb-1">Adresse</p>
               <p className="text-white/90">{COMPANY_ADDRESS}</p>
-              <p className="text-sm text-white/70 mt-1">
-                (En face Mosqué Lamidat)
-              </p>
             </div>
           </div>
           
@@ -349,10 +346,10 @@ const ContactForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Carte Google Maps - Garoua */}
+          {/* Carte Google Maps */}
           <div className="mt-6 rounded-lg overflow-hidden h-48 bg-gray-200">
             <iframe
-              title="Localisation Goolidev - Garoua"
+              title="Localisation Goolidev"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.923160732719!2d13.394627!3d9.301389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1085e3b8e5b5b5b5%3A0x123456789abcdef!2sLamidat%20Garoua!5e0!3m2!1sfr!2sfr!4v1234567890123!5m2!1sfr!2sfr"
               width="100%"
               height="100%"
