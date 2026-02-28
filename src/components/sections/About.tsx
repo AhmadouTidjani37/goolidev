@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
 import Section from '../common/Section';
-import proposImage from '../../assets/images/propos.png'; 
+import proposImage from '../../assets/images/propos.jpg';
 
 const About: React.FC = () => {
   const advantages = [
@@ -31,6 +31,7 @@ const About: React.FC = () => {
             src={proposImage} 
             alt="Équipe Goolidev - Professionnelles africaines musulmanes" 
             className="rounded-2xl shadow-xl w-full h-auto object-cover"
+            loading="lazy"  // ← AJOUTER CETTE LIGNE
           />
         </div>
         <div className="lg:w-1/2">

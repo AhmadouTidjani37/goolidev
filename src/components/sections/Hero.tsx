@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import Button from '../common/Button';
 import Container from '../common/Container';
-import heroImage from '../../assets/images/hero.png'; // Import de l'image locale
+import heroImage from '../../assets/images/hero.jpg';
 
 const Hero: React.FC = () => {
   const scrollToServices = () => {
@@ -59,6 +59,7 @@ const Hero: React.FC = () => {
               src={heroImage} 
               alt="Développeuse africaine musulmane professionnelle - Goolidev" 
               className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+              loading="lazy"  
             />
           </div>
         </div>
