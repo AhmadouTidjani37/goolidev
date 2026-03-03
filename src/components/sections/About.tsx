@@ -5,18 +5,15 @@ import Section from '../common/Section';
 import Card from '../common/Card';
 import Button from '../common/Button';
 import Team from './Team';
-import LazyImage from '../ui/LazyImage';
 
-// Import des images avec versions optimisées
+// Import de l'image principale uniquement
 import tidjaniImage from '../../assets/images/propos.jpg';
-import tidjaniThumbnail from '../../assets/images/propos-thumbnail.jpg'; // Miniature floue (à créer)
-import tidjaniWebp from '../../assets/images/propos.webp'; // Version WebP (optionnel)
 
 const About: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Préchargement de l'image prioritaire
+  // Préchargement de l'image
   useEffect(() => {
     const img = new Image();
     img.src = tidjaniImage;
@@ -57,45 +54,29 @@ const About: React.FC = () => {
   return (
     <Section id="about" className="bg-gradient-to-b from-gray-50 to-white">
       <div className="space-y-20">
-        {/* Partie 1: Présentation du Fondateur - Version optimisée */}
+        {/* Partie 1: Présentation du Fondateur */}
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2 animate-slide-right">
             <div className="relative">
               {/* Effet de glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
               
-              {/* Conteneur d'image avec chargement progressif */}
+              {/* Conteneur d'image avec dimensions fixes */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] w-full max-w-md mx-auto bg-gray-200">
-                {/* Miniature floue (affichée immédiatement) */}
-                {tidjaniThumbnail && !imageLoaded && (
-                  <img
-                    src={tidjaniThumbnail}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover filter blur-xl scale-105"
-                    aria-hidden="true"
-                  />
-                )}
-                
-                {/* Image principale avec support WebP */}
-                <picture>
-                  {tidjaniWebp && <source srcSet={tidjaniWebp} type="image/webp" />}
-                  <img
-                    src={tidjaniImage}
-                    alt="Ahmadou Tidjani - Fondateur de Goolidev"
-                    className={`w-full h-full object-cover object-center transition-all duration-700 ${
-                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-                    }`}
-                    loading="eager"
-                    fetchPriority="high"
-                    onLoad={() => setImageLoaded(true)}
-                    onError={() => setImageError(true)}
-                  />
-                </picture>
+                {/* Image principale */}
+                <img
+                  src={tidjaniImage}
+                  alt="Ahmadou Tidjani - Fondateur de Goolidev"
+                  className={`w-full h-full object-cover object-center transition-all duration-700 ${
+                    imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                  }`}
+                  loading="eager"
+                  fetchPriority="high"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageError(true)}
+                />
 
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none"></div>
-                
-                {/* Skeleton loader */}
+                {/* Skeleton loader pendant le chargement */}
                 {!imageLoaded && !imageError && (
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse"></div>
                 )}
@@ -108,13 +89,13 @@ const About: React.FC = () => {
                 )}
               </div>
               
-              {/* Badges d'information - optimisés avec will-change */}
+              {/* Badges d'information */}
               <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex flex-wrap gap-2 justify-center w-full px-4">
-                <div className="bg-white rounded-lg shadow-lg px-4 py-2 flex items-center space-x-2 animate-float will-change-transform">
+                <div className="bg-white rounded-lg shadow-lg px-4 py-2 flex items-center space-x-2 animate-float">
                   <MapPin className="w-4 h-4 text-primary-600" />
                   <span className="text-sm font-medium">Garoua, Cameroun</span>
                 </div>
-                <div className="bg-white rounded-lg shadow-lg px-4 py-2 flex items-center space-x-2 animate-float will-change-transform" style={{ animationDelay: '0.2s' }}>
+                <div className="bg-white rounded-lg shadow-lg px-4 py-2 flex items-center space-x-2 animate-float" style={{ animationDelay: '0.2s' }}>
                   <Calendar className="w-4 h-4 text-primary-600" />
                   <span className="text-sm font-medium">Fondé en 2022</span>
                 </div>
@@ -176,7 +157,7 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Partie 2: Pourquoi choisir Goolidev (avec lazy loading sur les icônes) */}
+        {/* Partie 2: Pourquoi choisir Goolidev */}
         <div className="text-center">
           <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">
             Nos atouts
@@ -208,7 +189,7 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Partie 3: Statistiques avec compteurs animés */}
+        {/* Partie 3: Statistiques */}
         <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
             <div className="transform hover:scale-110 transition-transform">
