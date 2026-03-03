@@ -1,15 +1,18 @@
+// components/common/Card.tsx
 import React from 'react';
 
 interface CardProps {
   children: React.ReactNode;
   className?: string;
   padding?: 'none' | 'sm' | 'md' | 'lg';
+  style?: React.CSSProperties; // Ajout de la prop style
 }
 
 const Card: React.FC<CardProps> = ({ 
   children, 
   className = '', 
-  padding = 'md' 
+  padding = 'md',
+  style // Ajout du paramètre style
 }) => {
   const paddingClasses = {
     none: 'p-0',
@@ -19,7 +22,10 @@ const Card: React.FC<CardProps> = ({
   };
 
   return (
-    <div className={`bg-white rounded-xl shadow-lg ${paddingClasses[padding]} ${className}`}>
+    <div 
+      className={`bg-white rounded-xl shadow-lg ${paddingClasses[padding]} ${className}`}
+      style={style} // Application du style
+    >
       {children}
     </div>
   );
