@@ -1,4 +1,4 @@
-// components/sections/About.tsx
+
 import React from 'react';
 import { CheckCircle, Award, Users, Target, Sparkles, Code, MapPin, Calendar } from 'lucide-react';
 import Section from '../common/Section';
@@ -6,7 +6,7 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 import Team from './Team';
 import LazyImage from '../ui/LazyImage';
-import tidjaniImage from '../../assets/images/propos.png'; 
+import tidjaniImage from '../../assets/images/propos.jpg'; 
 
 const About: React.FC = () => {
   const advantages = [
