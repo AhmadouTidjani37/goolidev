@@ -6,7 +6,7 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 import Team from './Team';
 import LazyImage from '../ui/LazyImage';
-import tidjaniImage from '../../assets/images/propos.jpg'; 
+import tidjaniImage from '../../assets/images/propos.png'; 
 
 const About: React.FC = () => {
   const advantages = [
