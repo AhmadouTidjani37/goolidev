@@ -110,7 +110,7 @@ const About: React.FC = () => {
                 <span>LinkedIn</span>
               </a>
               <a 
-                href="https://github.com/AhmadouTidjani37" 
+                href="https://github.com/ahmadou-tidjani" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition flex items-center space-x-2"
