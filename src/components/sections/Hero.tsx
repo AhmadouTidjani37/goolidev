@@ -1,4 +1,3 @@
-// components/sections/Hero.tsx
 import React, { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import Button from '../common/Button';
@@ -107,8 +106,8 @@ const Hero: React.FC = () => {
                   height: `${size}px`,
                   left: `${left}%`,
                   top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #f87171, #dc2626)',
-                  boxShadow: '0 0 20px #ef4444, 0 0 40px #b91c1c',
+                  background: 'radial-gradient(circle at 30% 30%, #f1e7e7, #e0d7d7)',
+                  boxShadow: '0 0 20px #ef4444, 0 0 40px #7e6868',
                   animationDelay: `${delay}s`,
                   animationDuration: `${duration}s`,
                   opacity: 0.9,
@@ -135,8 +134,8 @@ const Hero: React.FC = () => {
                   height: `${size}px`,
                   left: `${left}%`,
                   top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #c084fc, #9333ea)',
-                  boxShadow: '0 0 20px #a855f7, 0 0 40px #7e22ce',
+                  background: 'radial-gradient(circle at 30% 30%, #c2baca, #9333ea)',
+                  boxShadow: '0 0 20px #a855f7, 0 0 40px #9c82b3',
                   animationDelay: `${delay}s`,
                   animationDuration: `${duration}s`,
                   opacity: 0.8,
@@ -163,7 +162,7 @@ const Hero: React.FC = () => {
                   height: `${size}px`,
                   left: `${left}%`,
                   top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #fcd34d, #f59e0b)',
+                  background: 'radial-gradient(circle at 30% 30%, #ecebe4, #dad0c1)',
                   boxShadow: '0 0 15px #fbbf24, 0 0 30px #d97706',
                   animationDelay: `${delay}s`,
                   animationDuration: `${duration}s`,
@@ -212,7 +211,7 @@ const Hero: React.FC = () => {
                 height: `${Math.random() * 4 + 1}px`,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                backgroundColor: ['#fbbf24', '#f87171', '#60a5fa', '#c084fc'][Math.floor(Math.random() * 4)],
+                backgroundColor: ['#d8d5cc', '#f87171', '#60a5fa', '#d8d3dd'][Math.floor(Math.random() * 4)],
                 boxShadow: `0 0 ${Math.random() * 15 + 10}px currentColor`,
                 animationDelay: `${Math.random() * 8}s`,
                 animationDuration: `${Math.random() * 3 + 2}s`,
@@ -233,7 +232,7 @@ const Hero: React.FC = () => {
         <div className="max-w-3xl mx-auto text-center text-white">
          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
         <span className="block">Votre partenaire</span>
-        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-red-400 to-purple-400 my-2 leading-normal py-1">
+        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-red-200 to-purple-600 my-2 leading-normal py-1">
           digital
         </span>
         <span className="block">de confiance</span>
