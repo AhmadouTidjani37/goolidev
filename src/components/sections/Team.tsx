@@ -7,7 +7,7 @@ import Card from '../common/Card';
 import ceo from '../../assets/images/ceo.jpg';
 import director from '../../assets/images/director.jpg';
 import anonyme from '../../assets/images/anonyme.jpeg';
-import bich from '../../assets/images/bich.jpeg';
+import bich from '../../assets/images/bich.jpg';
 
 
 interface TeamMember {
