@@ -44,7 +44,7 @@ const About: React.FC = () => {
   ];
 
   const founderAchievements = [
-    '8+ ans d\'expérience en développement',
+    '4+ ans d\'expérience en développement',
     '50+ projets menés avec succès',
     '10+ développeurs formés',
     '3 startups accompagnées'

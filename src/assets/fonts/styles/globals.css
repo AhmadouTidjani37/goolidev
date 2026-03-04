@@ -1,0 +1,37 @@
+/* Dans votre fichier global.css */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(10px) translateX(-15px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(20px);
+  }
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+.animate-float-medium {
+  animation: float 5s ease-in-out infinite;
+}
+.animate-float-fast {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-float-very-fast {
+  animation: float 2s ease-in-out infinite;
+}
+.animate-ping-slow {
+  animation: ping 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.animate-pulse-slow {
+  animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}

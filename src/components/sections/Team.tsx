@@ -30,7 +30,7 @@ const teamMembers: TeamMember[] = [
     id: 'tidjani',
     name: 'Ahmadou Tidjani',
     role: 'Fondateur & Responsable IT',
-    description: 'Expert en développement full-stack avec 8 ans d\'expérience. Visionnaire passionné par l\'innovation technologique et l\'impact social du numérique.',
+    description: 'Expert en développement full-stack avec 4 ans d\'expérience. Visionnaire passionné par l\'innovation technologique et l\'impact social du numérique.',
     image: ceo,
     expertise: ['Architecture logicielle', 'DevOps', 'Cloud computing', 'Leadership technique', 'React/Node.js', 'Sécurité'],
     social: {

@@ -179,7 +179,7 @@ const ContactForm: React.FC = () => {
               className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition ${
                 errors.name ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Jean Dupont"
+              placeholder="Ahmad Tidjan"
               disabled={isSubmitting}
             />
             {errors.name && (
@@ -201,7 +201,7 @@ const ContactForm: React.FC = () => {
               className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="jean.dupont@email.com"
+              placeholder="ahmadtidjan00@gmail.com"
               disabled={isSubmitting}
             />
             {errors.email && (
