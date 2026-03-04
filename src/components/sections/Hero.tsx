@@ -3,17 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import Button from '../common/Button';
 import Container from '../common/Container';
-
-// Import des images JPG uniquement
 import heroImage from '../../assets/images/hero.jpg';
-import heroThumbnail from '../../assets/images/hero-thumbnail.jpg'; // À créer si nécessaire
+import heroThumbnail from '../../assets/images/hero-thumbnail.jpg'; 
 
 const Hero: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
-    // Préchargement de l'image principale
     const img = new Image();
     img.src = heroImage;
     img.onload = () => setImageLoaded(true);
@@ -59,30 +56,170 @@ const Hero: React.FC = () => {
           onError={() => setImageError(true)}
         />
 
-        {/* Overlay sombre avec bulles animées */}
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        {/* Overlay sombre avec dégradé */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 z-10" />
         
-        {/* ANIMATION DE BULLES BLEUES ET ROUGES */}
+        {/* ✨ ANIMATION DE BULLES COLORÉES ✨ */}
         <div className="absolute inset-0 overflow-hidden z-15 pointer-events-none">
-          {/* Bulles bleues */}
-          <div className="absolute top-10 left-[10%] w-32 h-32 bg-blue-500/20 rounded-full blur-3xl animate-float-slow"></div>
-          <div className="absolute bottom-20 right-[15%] w-48 h-48 bg-blue-600/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/3 right-[25%] w-24 h-24 bg-blue-400/30 rounded-full blur-2xl animate-float-fast"></div>
-          <div className="absolute bottom-1/4 left-[20%] w-40 h-40 bg-blue-500/25 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-2/3 left-[40%] w-20 h-20 bg-blue-400/20 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: '0.5s' }}></div>
           
-          {/* Bulles rouges */}
-          <div className="absolute top-20 right-[20%] w-36 h-36 bg-red-500/20 rounded-full blur-3xl animate-float-medium"></div>
-          <div className="absolute bottom-10 left-[30%] w-56 h-56 bg-red-600/15 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute top-1/2 right-[40%] w-28 h-28 bg-red-400/25 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: '0.8s' }}></div>
-          <div className="absolute bottom-1/3 left-[60%] w-44 h-44 bg-red-500/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: '2.2s' }}></div>
-          <div className="absolute top-3/4 right-[10%] w-16 h-16 bg-red-400/30 rounded-full blur-xl animate-float-fast" style={{ animationDelay: '1.2s' }}></div>
-          
-          {/* Petites bulles supplémentaires */}
-          <div className="absolute top-[15%] left-[45%] w-8 h-8 bg-blue-400/40 rounded-full blur-md animate-ping-slow"></div>
-          <div className="absolute bottom-[25%] right-[35%] w-12 h-12 bg-red-500/30 rounded-full blur-lg animate-pulse-slow"></div>
-          <div className="absolute top-[60%] left-[70%] w-6 h-6 bg-blue-500/50 rounded-full blur-sm animate-bounce-slow"></div>
-          <div className="absolute bottom-[40%] right-[5%] w-10 h-10 bg-red-400/40 rounded-full blur-md animate-float-very-fast"></div>
+          {/* Première couche : Bulles bleues électriques */}
+          {Array.from({ length: 40 }).map((_, i) => {
+            const size = Math.random() * 12 + 4; // 4px à 16px
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 8 + 6; // 6s à 14s
+            
+            return (
+              <div
+                key={`blue-${i}`}
+                className="absolute rounded-full animate-float-slow"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  background: 'radial-gradient(circle at 30% 30%, #60a5fa, #2563eb)',
+                  boxShadow: '0 0 20px #3b82f6, 0 0 40px #1d4ed8',
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`,
+                  opacity: 0.9,
+                  filter: 'blur(0.5px)',
+                }}
+              />
+            );
+          })}
+
+          {/* Deuxième couche : Bulles rouges ardentes */}
+          {Array.from({ length: 35 }).map((_, i) => {
+            const size = Math.random() * 14 + 3; // 3px à 17px
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 4;
+            const duration = Math.random() * 7 + 5; // 5s à 12s
+            
+            return (
+              <div
+                key={`red-${i}`}
+                className="absolute rounded-full animate-float-medium"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  background: 'radial-gradient(circle at 30% 30%, #f87171, #dc2626)',
+                  boxShadow: '0 0 20px #ef4444, 0 0 40px #b91c1c',
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`,
+                  opacity: 0.9,
+                  filter: 'blur(0.5px)',
+                }}
+              />
+            );
+          })}
+
+          {/* Troisième couche : Bulles violettes mystiques */}
+          {Array.from({ length: 30 }).map((_, i) => {
+            const size = Math.random() * 10 + 2; // 2px à 12px
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 6;
+            const duration = Math.random() * 9 + 4; // 4s à 13s
+            
+            return (
+              <div
+                key={`purple-${i}`}
+                className="absolute rounded-full animate-float-fast"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  background: 'radial-gradient(circle at 30% 30%, #c084fc, #9333ea)',
+                  boxShadow: '0 0 20px #a855f7, 0 0 40px #7e22ce',
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`,
+                  opacity: 0.8,
+                  filter: 'blur(0.5px)',
+                }}
+              />
+            );
+          })}
+
+          {/* Quatrième couche : Micro-bulles dorées */}
+          {Array.from({ length: 50 }).map((_, i) => {
+            const size = Math.random() * 6 + 1; // 1px à 7px
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 7;
+            const duration = Math.random() * 10 + 5; // 5s à 15s
+            
+            return (
+              <div
+                key={`gold-${i}`}
+                className="absolute rounded-full animate-twinkle"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  background: 'radial-gradient(circle at 30% 30%, #fcd34d, #f59e0b)',
+                  boxShadow: '0 0 15px #fbbf24, 0 0 30px #d97706',
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`,
+                  opacity: Math.random() * 0.5 + 0.5, // 0.5-1.0
+                  filter: 'blur(0.3px)',
+                }}
+              />
+            );
+          })}
+
+          {/* Cinquième couche : Bulles turquoise */}
+          {Array.from({ length: 25 }).map((_, i) => {
+            const size = Math.random() * 8 + 2; // 2px à 10px
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 8 + 4; // 4s à 12s
+            
+            return (
+              <div
+                key={`teal-${i}`}
+                className="absolute rounded-full animate-float-slow"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  background: 'radial-gradient(circle at 30% 30%, #2dd4bf, #0d9488)',
+                  boxShadow: '0 0 20px #14b8a6, 0 0 40px #115e59',
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`,
+                  opacity: 0.8,
+                  filter: 'blur(0.4px)',
+                }}
+              />
+            );
+          })}
+
+          {/* Effet de particules lumineuses */}
+          {Array.from({ length: 60 }).map((_, i) => (
+            <div
+              key={`sparkle-${i}`}
+              className="absolute rounded-full animate-pulse-glow"
+              style={{
+                width: `${Math.random() * 4 + 1}px`,
+                height: `${Math.random() * 4 + 1}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                backgroundColor: ['#fbbf24', '#f87171', '#60a5fa', '#c084fc'][Math.floor(Math.random() * 4)],
+                boxShadow: `0 0 ${Math.random() * 15 + 10}px currentColor`,
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${Math.random() * 3 + 2}s`,
+                opacity: Math.random() * 0.7 + 0.3,
+              }}
+            />
+          ))}
         </div>
         
         {/* Fallback en cas d'erreur */}
@@ -94,11 +231,13 @@ const Hero: React.FC = () => {
       {/* Contenu */}
       <Container className="relative z-30">
         <div className="max-w-3xl mx-auto text-center text-white">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="block">Votre partenaire</span>
-            <span className="block text-primary-400 my-2">digital</span>
-            <span className="block">de confiance</span>
-          </h1>
+         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        <span className="block">Votre partenaire</span>
+        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-red-400 to-purple-400 my-2 leading-normal py-1">
+          digital
+        </span>
+        <span className="block">de confiance</span>
+      </h1>
           
           <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed">
             Goolidev vous accompagne dans tous vos projets informatiques : 
@@ -110,16 +249,17 @@ const Hero: React.FC = () => {
               variant="primary" 
               size="lg" 
               onClick={scrollToServices}
-              className="group"
+              className="group relative overflow-hidden"
             >
-              Découvrir nos services
-              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span className="relative z-10">Découvrir nos services</span>
+              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
               onClick={scrollToContact}
-              className="border-white text-white hover:bg-white hover:text-gray-900"
+              className="border-white text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm"
             >
               Nous contacter
             </Button>
