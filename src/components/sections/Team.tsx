@@ -7,6 +7,8 @@ import Card from '../common/Card';
 import ceo from '../../assets/images/ceo.jpg';
 import director from '../../assets/images/director.jpg';
 import anonyme from '../../assets/images/anonyme.jpeg';
+import bich from '../../assets/images/bich.jpeg';
+
 
 interface TeamMember {
   id: string;
@@ -71,22 +73,21 @@ const teamMembers: TeamMember[] = [
     quote: "Ensemble, construisons un avenir numérique inclusif pour tous."
   },
   {
-    id: 'aboubakar',
-    name: 'Aboubakar Mohamad',
+    id: 'oumarou',
+    name: 'OUMAROU DJIDDA',
     role: 'Responsable Administratif',
     description: 'Passionné par les tâches administratives, la gestion des documents et l\'organisation des réunions.',
-    image: anonyme,
+    image: bich,
     expertise: ['Excel', 'Word', 'PowerPoint', 'Gestion documentaire', 'Organisation d\'événements'],
     social: {
-      email: 'aboubakar@goolidev.com',
+      email: 'lebichcharo@gmail.com',
     },
     badge: 'Responsable Admin',
-    location: 'Touboro, Cameroun',
+    location: 'Garoua, Cameroun',
     quote: "L'organisation est la clé de la réussite de tout projet."
   }
 ];
 
-// Composant d'image avec fallback
 const MemberImage: React.FC<{ src: string; alt: string; className: string }> = ({ src, alt, className }) => {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
