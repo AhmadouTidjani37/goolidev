@@ -1,4 +1,4 @@
-// components/layout/Header.tsx (version améliorée)
+// components/layout/Header.tsx (version avec logo qui change)
 import React, { useState, useEffect } from 'react';
 import Navigation from './Navigation';
 import logo from '../../assets/images/goolidev_logo.png';
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
       `}>
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
-            {/* Logo avec animation */}
+            {/* Logo avec animation - LE TEXTE PEUT CHANGER DE COULEUR */}
             <div className="flex items-center space-x-3 group cursor-pointer">
               <div className="relative">
                 <img 
@@ -48,6 +48,8 @@ const Header: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
               </div>
+              
+              {/* TEXTE GOOLIDEV - CHANGE DE COULEUR AU SCROLL */}
               <span className={`text-2xl font-bold transition-all duration-300 ${
                 isScrolled
                   ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400'
@@ -57,7 +59,7 @@ const Header: React.FC = () => {
               </span>
             </div>
             
-            {/* Navigation */}
+            {/* Navigation - TOUJOURS BLANC */}
             <Navigation isScrolled={isScrolled} />
           </div>
         </div>

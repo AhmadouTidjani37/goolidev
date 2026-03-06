@@ -8,6 +8,7 @@ import Button from '../common/Button';
 // Import des images (une seule image anonyme pour le test)
 import anonymeImage from '../../assets/images/anonyme.jpeg';
 import camertool from '../../assets/images/camertool.jpeg';
+import vide from '../../assets/images/vide.jpeg';
 
 console.log('📸 Image anonyme chargée:', anonymeImage);
 
@@ -33,7 +34,6 @@ const Portfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
 
-  // Liste des projets avec la MÊME image anonyme pour tous
   const projects: Project[] = [
     // 2 SITES WEB
     {
@@ -62,10 +62,10 @@ const Portfolio: React.FC = () => {
       categoryLabel: 'Site Vitrine',
       description: 'Site vitrine moderne pour une agence de communication avec portfolio interactif.',
       longDescription: 'Un site élégant et responsive pour présenter les services d\'une agence de communication.',
-      image: anonymeImage,
+      image: vide,
       tags: ['Next.js', 'TypeScript', 'Framer Motion', 'Prismic CMS', 'Tailwind'],
       client: 'Agence Créative Digital',
-      year: '2023',
+      year: '2026',
       link: 'https://agence-creative.com',
       features: [
         'Animations fluides avec Framer Motion',
@@ -79,15 +79,15 @@ const Portfolio: React.FC = () => {
     // 2 APPLIS MOBILES
     {
       id: 'mobile-delivery',
-      title: 'Rapide Livraison',
+      title: 'Chichi Store',
       category: 'mobile',
       categoryLabel: 'Application Mobile',
       description: 'Application de livraison de repas avec suivi en temps réel des coursiers.',
       longDescription: 'Une application complète de livraison de repas permettant aux utilisateurs de commander.',
-      image: anonymeImage,
+      image:vide,
       tags: ['React Native', 'Firebase', 'Redux', 'Google Maps API', 'Stripe'],
-      client: 'Rapide Livraison SARL',
-      year: '2024',
+      client: 'Chichi Store',
+      year: '2026',
       link: 'https://play.google.com/store/apps/details?id=com.rapide.livraison',
       features: [
         'Géolocalisation en temps réel',
@@ -99,15 +99,15 @@ const Portfolio: React.FC = () => {
     },
     {
       id: 'mobile-learning',
-      title: 'EduLearn Cameroun',
+      title: 'IUT Family',
       category: 'mobile',
       categoryLabel: 'Application Éducative',
       description: 'Plateforme d\'apprentissage en ligne avec cours vidéos et exercices interactifs.',
       longDescription: 'Une application éducative proposant des cours dans toutes les matières.',
-      image: anonymeImage,
+      image: vide,
       tags: ['Flutter', 'Django', 'PostgreSQL', 'WebSockets', 'AWS'],
       client: 'Ministère de l\'Éducation (partenariat)',
-      year: '2023',
+      year: '2026',
       link: 'https://apps.apple.com/app/edulearn-cameroun/id123456',
       features: [
         'Cours vidéo en streaming',
@@ -118,7 +118,7 @@ const Portfolio: React.FC = () => {
       ]
     },
 
-    // 2 DESIGN / AFFICHES PUBLICITAIRES
+   
     {
       id: 'design-restaurant',
       title: 'Saveurs d\'Afrique',
@@ -126,10 +126,10 @@ const Portfolio: React.FC = () => {
       categoryLabel: 'Identité Visuelle & Affiche',
       description: 'Création de l\'identité visuelle complète pour un restaurant traditionnel.',
       longDescription: 'Une identité visuelle chaleureuse et authentique incluant logo, carte des menus.',
-      image: anonymeImage,
+      image: vide,
       tags: ['Photoshop', 'Illustrator', 'Branding', 'Print Design', 'Typography'],
       client: 'Restaurant Saveurs d\'Afrique',
-      year: '2024',
+      year: '2026',
       features: [
         'Logo et charte graphique',
         'Menu design',
@@ -145,10 +145,10 @@ const Portfolio: React.FC = () => {
       categoryLabel: 'Campagne Publicitaire',
       description: 'Campagne complète pour la Fashion Week de Douala 2024.',
       longDescription: 'Une campagne visuelle percutante incluant affiches grand format.',
-      image: anonymeImage,
+      image: vide,
       tags: ['Photoshop', 'Illustrator', 'InDesign', 'Motion Design', 'Social Media'],
       client: 'Fashion Week Douala',
-      year: '2024',
+      year: '2026',
       features: [
         'Affiches officielles',
         'Bannières pour réseaux sociaux',
@@ -159,12 +159,12 @@ const Portfolio: React.FC = () => {
     }
   ];
 
-  // Filtrer les projets
+
   const filteredProjects = filter === 'all' 
     ? projects 
     : projects.filter(project => project.category === filter);
 
-  // Catégories pour le filtre
+
   const categories = [
     { value: 'all' as FilterType, label: 'Tous les projets' },
     { value: 'web' as FilterType, label: 'Sites Web' },
@@ -172,7 +172,6 @@ const Portfolio: React.FC = () => {
     { value: 'design' as FilterType, label: 'Design & Affiches' }
   ];
 
-  // Obtenir la couleur de catégorie
   const getCategoryColor = (category: string) => {
     switch(category) {
       case 'web': return 'bg-blue-100 text-blue-700 border-blue-200';

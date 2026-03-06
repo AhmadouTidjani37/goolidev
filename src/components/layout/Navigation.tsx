@@ -1,4 +1,4 @@
-// components/layout/Navigation.tsx (version harmonisée)
+// components/layout/Navigation.tsx (version avec menu toujours blanc)
 import React from 'react';
 import { Menu, X } from 'lucide-react';
 import Button from '../common/Button';
@@ -31,22 +31,15 @@ const Navigation: React.FC<NavigationProps> = ({
     return 'primary';
   };
 
-  // Déterminer la couleur du texte pour le menu desktop
-  const getTextColor = () => {
-    if (isScrolled) return 'text-gray-700 hover:text-primary-600';
-    if (isDarkSection) return 'text-white hover:text-primary-300';
-    return 'text-gray-700 hover:text-primary-600';
-  };
-
   return (
     <>
-      {/* Desktop Menu */}
+      {/* Desktop Menu - TOUJOURS BLANC */}
       <nav className="hidden md:flex items-center space-x-8">
         {navigationItems.map((item) => (
           <a
             key={item.id}
             href={item.href}
-            className={`transition font-medium ${getTextColor()}`}
+            className="text-white hover:text-primary-300 transition font-medium" // TOUJOURS BLANC
             onClick={(e) => {
               e.preventDefault();
               handleLinkClick(item.href);
@@ -64,44 +57,24 @@ const Navigation: React.FC<NavigationProps> = ({
         </Button>
       </nav>
 
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button - TOUJOURS BLANC */}
       <button 
-        className={`md:hidden transition-colors ${
-          isScrolled 
-            ? 'text-gray-700' 
-            : isDarkSection 
-              ? 'text-white' 
-              : 'text-gray-700'
-        }`}
+        className="md:hidden text-white transition-colors hover:text-primary-300" // TOUJOURS BLANC
         onClick={toggle}
         aria-label="Menu"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {/* Mobile Menu - HARMONISÉ AVEC LE THEME DU DESKTOP */}
+      {/* Mobile Menu - FOND SOMBRE, TEXTE BLANC */}
       {isOpen && (
-        <div 
-          className={`
-            absolute top-full left-0 right-0 shadow-2xl md:hidden animate-fade-in
-            ${isScrolled || !isDarkSection 
-              ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200' 
-              : 'bg-gray-900/95 backdrop-blur-xl border-b border-white/10'
-            }
-          `}
-        >
+        <div className="absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-b border-white/10 shadow-2xl md:hidden animate-fade-in">
           <nav className="flex flex-col p-6 space-y-4">
             {navigationItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className={`
-                  transition py-3 px-4 rounded-xl font-medium
-                  ${isScrolled || !isDarkSection
-                    ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50/50' 
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
-                  }
-                `}
+                className="text-white/90 hover:text-white hover:bg-white/10 transition py-3 px-4 rounded-xl font-medium" // TOUJOURS BLANC
                 onClick={(e) => {
                   e.preventDefault();
                   handleLinkClick(item.href);
@@ -111,10 +84,10 @@ const Navigation: React.FC<NavigationProps> = ({
               </a>
             ))}
             
-            {/* Version mobile du bouton avec le même thème */}
-            <div className="pt-4 mt-2 border-t border-gray-200/20">
+            {/* Version mobile du bouton */}
+            <div className="pt-4 mt-2 border-t border-white/10">
               <Button 
-                variant={isScrolled || !isDarkSection ? 'primary' : 'outline-light'}
+                variant="outline-light" // Toujours outline-light pour rester cohérent
                 size="lg"
                 className="w-full"
               >
