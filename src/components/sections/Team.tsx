@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import { Linkedin, Github, Mail, MapPin, Award, User } from 'lucide-react';
 import Card from '../common/Card';
-
-// Import des images
 import ceo from '../../assets/images/ceo.jpg';
 import director from '../../assets/images/director.jpg';
 import anonyme from '../../assets/images/anonyme.jpeg';
+import pj from '../../assets/images/pj.jpg';
 import bich from '../../assets/images/bich.jpg';
 
 
@@ -85,7 +84,8 @@ const teamMembers: TeamMember[] = [
     badge: 'Responsable Admin',
     location: 'Garoua, Cameroun',
     quote: "L'organisation est la clé de la réussite de tout projet."
-  }
+  },
+  
 ];
 
 const MemberImage: React.FC<{ src: string; alt: string; className: string }> = ({ src, alt, className }) => {

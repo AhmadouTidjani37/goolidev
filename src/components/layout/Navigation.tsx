@@ -1,4 +1,4 @@
-// components/layout/Navigation.tsx (version avec outline-light)
+// components/layout/Navigation.tsx (version harmonisée)
 import React from 'react';
 import { Menu, X } from 'lucide-react';
 import Button from '../common/Button';
@@ -25,10 +25,17 @@ const Navigation: React.FC<NavigationProps> = ({
   };
 
   // Déterminer le variant du bouton
-  const getButtonVariant = (): 'primary' | 'outline' | 'outline-light' => {
+  const getButtonVariant = (): 'primary' | 'outline' | 'outline-light' | 'glass' | 'gradient' => {
     if (isScrolled) return 'primary';
     if (isDarkSection) return 'outline-light';
     return 'primary';
+  };
+
+  // Déterminer la couleur du texte pour le menu desktop
+  const getTextColor = () => {
+    if (isScrolled) return 'text-gray-700 hover:text-primary-600';
+    if (isDarkSection) return 'text-white hover:text-primary-300';
+    return 'text-gray-700 hover:text-primary-600';
   };
 
   return (
@@ -39,13 +46,7 @@ const Navigation: React.FC<NavigationProps> = ({
           <a
             key={item.id}
             href={item.href}
-            className={`transition font-medium ${
-              isScrolled 
-                ? 'text-gray-700 hover:text-primary-600' 
-                : isDarkSection
-                  ? 'text-white hover:text-primary-300'
-                  : 'text-gray-700 hover:text-primary-600'
-            }`}
+            className={`transition font-medium ${getTextColor()}`}
             onClick={(e) => {
               e.preventDefault();
               handleLinkClick(item.href);
@@ -78,15 +79,29 @@ const Navigation: React.FC<NavigationProps> = ({
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - HARMONISÉ AVEC LE THEME DU DESKTOP */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden animate-fade-in">
-          <nav className="flex flex-col p-4 space-y-3">
+        <div 
+          className={`
+            absolute top-full left-0 right-0 shadow-2xl md:hidden animate-fade-in
+            ${isScrolled || !isDarkSection 
+              ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200' 
+              : 'bg-gray-900/95 backdrop-blur-xl border-b border-white/10'
+            }
+          `}
+        >
+          <nav className="flex flex-col p-6 space-y-4">
             {navigationItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className="text-gray-700 hover:text-primary-600 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+                className={`
+                  transition py-3 px-4 rounded-xl font-medium
+                  ${isScrolled || !isDarkSection
+                    ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50/50' 
+                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  }
+                `}
                 onClick={(e) => {
                   e.preventDefault();
                   handleLinkClick(item.href);
@@ -95,9 +110,17 @@ const Navigation: React.FC<NavigationProps> = ({
                 {item.label}
               </a>
             ))}
-            <Button variant="primary" size="sm" className="w-full mt-2">
-              Devis gratuit
-            </Button>
+            
+            {/* Version mobile du bouton avec le même thème */}
+            <div className="pt-4 mt-2 border-t border-gray-200/20">
+              <Button 
+                variant={isScrolled || !isDarkSection ? 'primary' : 'outline-light'}
+                size="lg"
+                className="w-full"
+              >
+                Devis gratuit
+              </Button>
+            </div>
           </nav>
         </div>
       )}

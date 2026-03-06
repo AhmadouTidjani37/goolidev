@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+// components/sections/Hero.tsx (version corrigée)
+import React, { useEffect, useState, useRef } from 'react';
+import { ChevronRight, Zap, Globe, Shield } from 'lucide-react';
 import Button from '../common/Button';
 import Container from '../common/Container';
 import heroImage from '../../assets/images/hero.jpg';
@@ -8,12 +9,37 @@ import heroThumbnail from '../../assets/images/hero-thumbnail.jpg';
 const Hero: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentWord, setCurrentWord] = useState(0);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const words = ['Innovation', 'Performance', 'Sécurité', 'Design', 'Excellence'];
 
   useEffect(() => {
     const img = new Image();
     img.src = heroImage;
     img.onload = () => setImageLoaded(true);
     img.onerror = () => setImageError(true);
+
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        setMousePosition({ x, y });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const scrollToServices = () => {
@@ -26,12 +52,12 @@ const Hero: React.FC = () => {
 
   return (
     <section 
+      ref={heroRef}
       id="accueil" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 pt-20" // Ajout de pt-20 pour éviter le chevauchement
     >
-      {/* Image de fond avec chargement progressif */}
+      {/* Image de fond avec effet parallaxe */}
       <div className="absolute inset-0">
-        {/* Miniature floue si disponible */}
         {heroThumbnail && !imageLoaded && (
           <div 
             className="absolute inset-0 bg-cover bg-center filter blur-xl scale-110 transition-opacity duration-1000"
@@ -42,229 +68,136 @@ const Hero: React.FC = () => {
           />
         )}
         
-        {/* Image principale */}
         <img
           src={heroImage}
           alt="Goolidev - Solutions digitales"
-          className={`w-full h-full object-cover transition-opacity duration-1000 ${
-            imageLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`w-full h-full object-cover transition-opacity duration-1000 scale-105`}
+          style={{
+            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`,
+            transition: 'transform 0.1s ease-out',
+          }}
           loading="eager"
           fetchPriority="high"
           onLoad={() => setImageLoaded(true)}
           onError={() => setImageError(true)}
         />
 
-        {/* Overlay sombre avec dégradé */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 z-10" />
+        {/* Overlay moderne avec dégradé dynamique */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-900/80 to-gray-900/90 z-10" />
         
-        {/* ✨ ANIMATION DE BULLES COLORÉES ✨ */}
-        <div className="absolute inset-0 overflow-hidden z-15 pointer-events-none">
-          
-          {/* Première couche : Bulles bleues électriques */}
-          {Array.from({ length: 40 }).map((_, i) => {
-            const size = Math.random() * 12 + 4; // 4px à 16px
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const duration = Math.random() * 8 + 6; // 6s à 14s
-            
-            return (
-              <div
-                key={`blue-${i}`}
-                className="absolute rounded-full animate-float-slow"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #60a5fa, #2563eb)',
-                  boxShadow: '0 0 20px #3b82f6, 0 0 40px #1d4ed8',
-                  animationDelay: `${delay}s`,
-                  animationDuration: `${duration}s`,
-                  opacity: 0.9,
-                  filter: 'blur(0.5px)',
-                }}
-              />
-            );
-          })}
-
-          {/* Deuxième couche : Bulles rouges ardentes */}
-          {Array.from({ length: 35 }).map((_, i) => {
-            const size = Math.random() * 14 + 3; // 3px à 17px
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const delay = Math.random() * 4;
-            const duration = Math.random() * 7 + 5; // 5s à 12s
-            
-            return (
-              <div
-                key={`red-${i}`}
-                className="absolute rounded-full animate-float-medium"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #f1e7e7, #e0d7d7)',
-                  boxShadow: '0 0 20px #ef4444, 0 0 40px #7e6868',
-                  animationDelay: `${delay}s`,
-                  animationDuration: `${duration}s`,
-                  opacity: 0.9,
-                  filter: 'blur(0.5px)',
-                }}
-              />
-            );
-          })}
-
-          {/* Troisième couche : Bulles violettes mystiques */}
-          {Array.from({ length: 30 }).map((_, i) => {
-            const size = Math.random() * 10 + 2; // 2px à 12px
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const delay = Math.random() * 6;
-            const duration = Math.random() * 9 + 4; // 4s à 13s
-            
-            return (
-              <div
-                key={`purple-${i}`}
-                className="absolute rounded-full animate-float-fast"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #c2baca, #9333ea)',
-                  boxShadow: '0 0 20px #a855f7, 0 0 40px #9c82b3',
-                  animationDelay: `${delay}s`,
-                  animationDuration: `${duration}s`,
-                  opacity: 0.8,
-                  filter: 'blur(0.5px)',
-                }}
-              />
-            );
-          })}
-
-          {/* Quatrième couche : Micro-bulles dorées */}
-          {Array.from({ length: 50 }).map((_, i) => {
-            const size = Math.random() * 6 + 1; // 1px à 7px
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const delay = Math.random() * 7;
-            const duration = Math.random() * 10 + 5; // 5s à 15s
-            
-            return (
-              <div
-                key={`gold-${i}`}
-                className="absolute rounded-full animate-twinkle"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #ecebe4, #dad0c1)',
-                  boxShadow: '0 0 15px #fbbf24, 0 0 30px #d97706',
-                  animationDelay: `${delay}s`,
-                  animationDuration: `${duration}s`,
-                  opacity: Math.random() * 0.5 + 0.5, // 0.5-1.0
-                  filter: 'blur(0.3px)',
-                }}
-              />
-            );
-          })}
-
-          {/* Cinquième couche : Bulles turquoise */}
-          {Array.from({ length: 25 }).map((_, i) => {
-            const size = Math.random() * 8 + 2; // 2px à 10px
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const duration = Math.random() * 8 + 4; // 4s à 12s
-            
-            return (
-              <div
-                key={`teal-${i}`}
-                className="absolute rounded-full animate-float-slow"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  background: 'radial-gradient(circle at 30% 30%, #2dd4bf, #0d9488)',
-                  boxShadow: '0 0 20px #14b8a6, 0 0 40px #115e59',
-                  animationDelay: `${delay}s`,
-                  animationDuration: `${duration}s`,
-                  opacity: 0.8,
-                  filter: 'blur(0.4px)',
-                }}
-              />
-            );
-          })}
-
-          {/* Effet de particules lumineuses */}
-          {Array.from({ length: 60 }).map((_, i) => (
-            <div
-              key={`sparkle-${i}`}
-              className="absolute rounded-full animate-pulse-glow"
-              style={{
-                width: `${Math.random() * 4 + 1}px`,
-                height: `${Math.random() * 4 + 1}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                backgroundColor: ['#d8d5cc', '#f87171', '#60a5fa', '#d8d3dd'][Math.floor(Math.random() * 4)],
-                boxShadow: `0 0 ${Math.random() * 15 + 10}px currentColor`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${Math.random() * 3 + 2}s`,
-                opacity: Math.random() * 0.7 + 0.3,
-              }}
-            />
-          ))}
+        {/* Effet de grille numérique */}
+        <div className="absolute inset-0 opacity-20 z-15">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: '50px 50px',
+          }} />
         </div>
-        
-        {/* Fallback en cas d'erreur */}
-        {imageError && (
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-secondary-900 z-0" />
-        )}
+
+        {/* Particules animées */}
+        <div className="absolute inset-0 overflow-hidden z-20">
+          {[...Array(100)].map((_, i) => {
+            const size = Math.random() * 4 + 1;
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+            return (
+              <div
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: size,
+                  height: size,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  opacity: Math.random() * 0.5,
+                  animation: `float ${duration}s linear infinite`,
+                  animationDelay: `${delay}s`,
+                  boxShadow: `0 0 ${size * 2}px rgba(59, 130, 246, 0.5)`,
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
 
       {/* Contenu */}
       <Container className="relative z-30">
-        <div className="max-w-3xl mx-auto text-center text-white">
-         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-        <span className="block">Votre partenaire</span>
-        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-red-200 to-purple-600 my-2 leading-normal py-1">
-          digital
-        </span>
-        <span className="block">de confiance</span>
-      </h1>
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Titre principal avec animation - CORRIGÉ */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.2]"> {/* leading normalisé */}
+            <span className="block text-white/90">Votre partenaire</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient bg-[length:200%] py-4"> {/* padding vertical ajouté */}
+              digital
+            </span>
+            <span className="block text-white/90">de confiance</span>
+          </h1>
+
+          {/* Texte rotatif */}
+          <div className="h-16 mb-8">
+            <p className="text-xl md:text-2xl text-white/80">
+              Nous transformons vos idées en{' '}
+              <span className="relative inline-block">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 blur-xl opacity-50" />
+                <span className="relative text-white font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  {words[currentWord]}
+                </span>
+              </span>
+            </p>
+          </div>
           
-          <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-2xl mx-auto">
             Goolidev vous accompagne dans tous vos projets informatiques : 
             du design à la sécurité, en passant par le développement et l'administratif.
           </p>
 
+          {/* Stats rapides */}
+          <div className="flex justify-center gap-8 mb-12">
+            {[
+              { icon: Globe, label: '4+ ans', value: 'Expérience' },
+              { icon: Zap, label: '52+', value: 'Projets' },
+              { icon: Shield, label: '47+', value: 'Clients' },
+            ].map((stat, index) => (
+              <div key={index} className="text-center group">
+                <stat.icon className="w-6 h-6 text-blue-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                <div className="text-white font-bold">{stat.label}</div>
+                <div className="text-white/60 text-sm">{stat.value}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Boutons d'action */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              variant="primary" 
-              size="lg" 
+              variant="gradient" 
+              size="xl" 
               onClick={scrollToServices}
               className="group relative overflow-hidden"
+              icon={<ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+              iconPosition="right"
+              glow
             >
-              <span className="relative z-10">Découvrir nos services</span>
-              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              Découvrir nos services
             </Button>
             <Button 
-              variant="outline" 
-              size="lg" 
+              variant="glass" 
+              size="xl" 
               onClick={scrollToContact}
-              className="border-white text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm"
+              className="backdrop-blur-md"
             >
               Nous contacter
             </Button>
           </div>
+          
+          {/* Espace supplémentaire après les boutons */}
+          <div className="h-16"></div>
         </div>
       </Container>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse" />
+        </div>
+      </div>
     </section>
   );
 };
