@@ -66,7 +66,7 @@ const Portfolio: React.FC = () => {
       tags: ['Next.js', 'TypeScript', 'Framer Motion', 'Prismic CMS', 'Tailwind'],
       client: 'Agence Créative Digital',
       year: '2026',
-      link: 'https://agence-creative.com',
+      link: '#',
       features: [
         'Animations fluides avec Framer Motion',
         'Blog avec CMS headless',
@@ -88,7 +88,7 @@ const Portfolio: React.FC = () => {
       tags: ['React Native', 'Firebase', 'Redux', 'Google Maps API', 'Stripe'],
       client: 'Chichi Store',
       year: '2026',
-      link: 'https://play.google.com/store/apps/details?id=com.rapide.livraison',
+      link: '#',
       features: [
         'Géolocalisation en temps réel',
         'Paiement intégré (carte et mobile money)',
@@ -108,7 +108,7 @@ const Portfolio: React.FC = () => {
       tags: ['Flutter', 'Django', 'PostgreSQL', 'WebSockets', 'AWS'],
       client: 'Ministère de l\'Éducation (partenariat)',
       year: '2026',
-      link: 'https://apps.apple.com/app/edulearn-cameroun/id123456',
+      link: '#',
       features: [
         'Cours vidéo en streaming',
         'Quiz interactifs avec correction',

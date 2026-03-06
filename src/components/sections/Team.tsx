@@ -73,7 +73,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 'oumarou',
-    name: 'OUMAROU DJIDDA',
+    name: 'Omarou Djidda',
     role: 'Responsable Administratif',
     description: 'Passionné par les tâches administratives, la gestion des documents et l\'organisation des réunions.',
     image: bich,
@@ -84,6 +84,20 @@ const teamMembers: TeamMember[] = [
     badge: 'Responsable Admin',
     location: 'Garoua, Cameroun',
     quote: "L'organisation est la clé de la réussite de tout projet."
+  },
+  {
+    id: 'mamouda',
+    name: 'Mamouda Ali',
+    role: 'Promoteur & Coordinateur à Garoua',
+    description: 'Pionnier du numérique dans la région du Nord, coordinateur des projets terrain et du développement communautaire. Plus de 10 ans d\'expérience en gestion de projets.',
+    image: pj,
+    expertise: ['Développement communautaire', 'Gestion de projets', 'Formation', 'Impact social', 'Partenariats', 'Mobilisation'],
+    social: {
+      email: 'mamouda00@gmail.com',
+    },
+    badge: 'Coordinateur',
+    location: 'Garoua, Cameroun',
+    quote: "Ensemble, construisons un avenir numérique inclusif pour tous."
   },
   
 ];
